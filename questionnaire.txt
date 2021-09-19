@@ -4,27 +4,37 @@ QUESTIONNAIRE!
 The following questionnaire seeks to understand your previous knowledge about some of the concepts that we will learn in class during the coming term.
 
 1. Do you know any programming languages? If you do, which ones?
+A: Python and Java.
 
 2. What is your primary computer operating system (OS)?
+A: Windows 10.
 
 3. Do you own a smartphone, tablet, or mobile device? What is your favourite OS for mobile devices?
+A: I own a smartphone and iOS is my favourite OS for mobile devices.
 
 4. Do you use any social networking services? If you do, which ones? Why?
+A: Instagram and Facebook for connecting with friends.
 
 5. Expand the following acronyms and do research about their meaning. You may look them up if you don't know:
 
-    HTTP
-    REST    
-    API
+    HTTP - Hypertext Transfer Protocol: A protocol for transmitting hypermedia documents between web browsers and servers
+    REST - Representational State Transfer: Software architecture that that provides standards for internet computer systems, ensuring interoperability between systems.
+    API - Application Programming Interface: A software intermediary that relays information between different applications, allowing them to communicate with each other.
 
 6. Do you play a musical instrument or sing? If so, how much experience do you have?
+A: I play piano. I took lessons for 8 years but I no longer play often anymore.
 
 7. Can you read music notation? If so, how well?
+A: I can read it quite well. 
 
 8. How large is your personal music collection? Estimate the number of artists, albums, and songs. If instead you listen to music using streaming services, how many playlists, artists, albums, and songs do you have in your account?
+A: I have 15 playlists on my streaming service account and over 1000 songs.
 
 9. How do you search and find new music?
+A: Spotify recommendations, friends.
 
 11. Are you aware of any ways in which artists are dealing with public performances post-COVID? Do you think live performances are essential to your musical experience?
+A: I am not aware of any ways in which artists are dealing with public performances post-COVID, but I do think that live performances are essential to my musical experience.
 
 12. Name two musical artists that you like. What do you find interesting about their music that makes you like them?
+A: Queen because of their anthemic songs and Kanye West because of his sampling and production.
