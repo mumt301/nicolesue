@@ -1,0 +1,146 @@
+/* links to other pages */
+.links{
+    background-color:rgb(153, 156, 158);
+    /* overflow: hidden; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.links a{ 
+    /* float:left; */
+    padding: 12px 14px;
+    font-size: 20px;
+    text-align: center;
+    font-family: Impact;
+    font-size: 150%;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.links a:hover{
+    color:sandybrown;
+}
+
+/* background color */
+body{
+    background-color: rgb(190, 190, 190);
+    text-align: center;
+}
+
+/* hide audio */
+audio{
+    display: none;
+}
+
+/* headings and paragraphs*/
+h1{
+    text-align: center;
+    font-family: Impact;
+    font-size: 16vw;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h2{
+    text-align: center;
+    font-family: Impact;
+    font-size: 6vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h3{
+    text-align: center;
+    font-family: Impact;
+    font-size: 3vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color:rgb(70, 70, 70);
+}
+
+p{
+    font-family: Verdana, sans-serif;
+    font-size: 1.56vw;
+    /* font-size: 125%; */
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-right: 50px;
+}
+
+/* center */
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* put images side by side */
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+}
+
+.column{
+    flex: 50%;
+    max-width: 49%;
+    padding: 4px;
+}
+
+.column img{
+    margin-top: 9px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+@media screen and (max-width: 900px){
+    .column{
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+/* align text */
+div {
+    text-align: justify;
+}
+
+/* format discography */
+.discography{
+    padding: 20px;
+}
+
+ul{
+    text-align: center;
+}
+
+li{
+    display: inline-block;
+    margin-inline-start: 10px;
+}
+
+figcaption{
+    font-family: FreeMono, monospace;
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color:rgb(116, 113, 113);
+}
+
+/* resize youtube videos */
+.resize {
+    overflow: hidden;
+    padding-top: 50%;
+    position: relative;
+}
+  
+.resize iframe {
+     height: 100%;
+     width: 100%;
+     left: 0;
+     right: 0;
+     top: 0;
+     position: absolute;
+}
+
