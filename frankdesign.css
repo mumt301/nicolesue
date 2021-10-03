@@ -128,19 +128,4 @@ figcaption{
     color:rgb(116, 113, 113);
 }
 
-/* resize youtube videos */
-.resize {
-    overflow: hidden;
-    padding-top: 50%;
-    position: relative;
-}
-  
-.resize iframe {
-     height: 100%;
-     width: 100%;
-     left: 0;
-     right: 0;
-     top: 0;
-     position: absolute;
-}
 
