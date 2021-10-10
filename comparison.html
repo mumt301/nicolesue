@@ -1,0 +1,393 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Comparison of Audio Compression Methods</title>
+        <link rel="stylesheet" href="comparisondesign.css"/>
+        <script type="text/javascript"></script>
+    </head>
+    <body>
+        <h1>Comparison of Audio Compression Methods</h1>
+        <div id="comparison_table"></div>
+        <script>
+            const header = ["File Name", "Compression Algorithm", "Bit-rate",
+                "Original Size", "Compressed Size", "Compression Ratio", "Link to Original Audio",
+                "Link to Compressed Audio", "Link to Residual Audio"]
+            let samples = [{
+                "File Name": "Wolves",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "96 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "703 KB",
+                "Compression Ratio": "0.05",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_mp3_96.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_mp3_96.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "128 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "938 KB",
+                "Compression Ratio": "0.06",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_mp3_128.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_mp3_128.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "192 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1370 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_mp3_192.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_mp3_192.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "320 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "2290 KB",
+                "Compression Ratio": "0.15",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_mp3_320.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_mp3_320.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "96 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "703 KB",
+                "Compression Ratio": "0.05",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ac3_96.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ac3_96.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "128 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "937 KB",
+                "Compression Ratio": "0.06",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ac3_128.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ac3_128.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "192 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1370 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ac3_192.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ac3_192.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "320 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "2280 KB",
+                "Compression Ratio": "0.15",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ac3_320.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ac3_320.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "98 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "990 KB",
+                "Compression Ratio": "0.06",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_m4a_98.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_m4a_98.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "128 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1300 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_m4a_128.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_m4a_128.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "192 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1250 KB",
+                "Compression Ratio": "0.08",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_m4a_192.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_m4a_192.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "320 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1310 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_m4a_320.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_m4a_320.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "Low Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "297 KB",
+                "Compression Ratio": "0.02",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ogg_low.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ogg_low.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "Mid-Low Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "341 KB",
+                "Compression Ratio": "0.02",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ogg_midlow.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ogg_midlow.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "Mid-High Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "578 KB",
+                "Compression Ratio": "0.04",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ogg_midhigh.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ogg_midhigh.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "Wolves",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "High Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1210 KB",
+                "Compression Ratio": "0.08",
+                "Link to Original Audio": '<a href="Wolves/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="wolves_ogg_high.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="wolves_residual_ogg_high.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "96 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "703 KB",
+                "Compression Ratio": "0.05",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_mp3_96.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_mp3_96.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "128 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "938 KB",
+                "Compression Ratio": "0.06",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_mp3_128.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_mp3_128.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "192 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1370 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_mp3_192.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_mp3_192.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "MP3",
+                "Bit-rate": "320 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "2290 KB",
+                "Compression Ratio": "0.15",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_mp3_96.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_mp3_96.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "96 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "703 KB",
+                "Compression Ratio": "0.05",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ac3_96.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ac3_96.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "128 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "937 KB",
+                "Compression Ratio": "0.06",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ac3_128.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ac3_128.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "192 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1370 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ac3_192.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ac3_192.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "AC3",
+                "Bit-rate": "320 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "2280 KB",
+                "Compression Ratio": "0.15",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ac3_320.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ac3_320.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "98 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1240 KB",
+                "Compression Ratio": "0.08",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_m4a_98.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_m4a_98.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "128 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1290 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_m4a_128.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_m4a_128.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "192 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1380 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_m4a_192.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_m4a_192.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "M4A",
+                "Bit-rate": "320 kbps",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1390 KB",
+                "Compression Ratio": "0.09",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_m4a_320.mp3">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_m4a_320.mp3">Residual Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "Low Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "476 KB",
+                "Compression Ratio": "0.03",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ogg_low.ogg">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ogg_low.ogg">Compressed Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "Mid-Low Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "572 KB",
+                "Compression Ratio": "0.04",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ogg_midlow.ogg">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ogg_midlow.ogg">Compressed Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "Mid-High Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "944 KB",
+                "Compression Ratio": "0.06",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ogg_midhigh.ogg">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ogg_midhigh.ogg">Compressed Audio</a>'
+            },
+            {
+                "File Name": "On Sight",
+                "Compression Algorithm": "OGG",
+                "Bit-rate": "High Quality",
+                "Original Size": "15,100 KB",
+                "Compressed Size": "1520 KB",
+                "Compression Ratio": "0.10",
+                "Link to Original Audio": '<a href="On/Sight/(Instrumental).wav">Original Audio</a>',
+                "Link to Compressed Audio": '<a href="on_sight_ogg_high.ogg">Compressed Audio</a>',
+                "Link to Residual Audio": '<a href="on_sight_residual_ogg_high.ogg">Compressed Audio</a>'
+            },
+            ]
+            function comparison(){
+                let table = document.createElement("table");
+                table.id = "comparison_table";
+                let headerName = table.insertRow(-1);
+                for (i = 0; i < header.length; i++) {
+                    let headerCell = document.createElement("TH");
+                    headerCell.innerHTML = header[i];
+                    headerName.appendChild(headerCell);
+                }
+                for (row = 0; row < samples.length; row++){
+                    tr = document.createElement("tr");
+                    let sample_data = Object.keys(samples[row]);
+                    for (col = 0; col < sample_data.length; col++){
+                        td = document.createElement("td");
+                        tr.appendChild(td);
+                        td.innerHTML = samples[row][sample_data[col]];
+                    }
+                    table.appendChild(tr);
+                }
+                document.getElementById("comparison_table").appendChild(table);
+            }
+            comparison();
+        </script>
+                <br><a style="font-family: Verdana, sans-serif" href="https://mumt301.github.io/nicolesue/index.html">Nicole's Page</a>
+    </body>
+</html>
