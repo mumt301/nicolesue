@@ -3,11 +3,6 @@ body{
     text-align: center;
 }
 
-img {
-    border:10px ridge;
-    border-color:rgb(198, 232, 245);
-}
-
 h1{
     text-align: center;
     font-family: sans-serif;
