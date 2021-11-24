@@ -21,6 +21,40 @@
         <p>The <code>pizzicato.js</code> library (and other similar ones) use the <a
                 href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> to play sounds on
             the browser.</p>
-        <div id="thereminZone"></div>
+        <div id="thereminZone"></div><br>
+        <div>
+            <p id="curFreq"></p>
+            <p id="intFreq"></p>
+            <p id="curNote"></p>
+            <p id="intNote"></p>
+        </div>
+        <form method="get" id="parameters">
+            <fieldset>
+                <legend>Theremin Parameters</legend>
+                <label for="interval">Interval:</label>
+                <select name="interval" id="interval" >
+                    <option value="0">Select Interval</option>
+                    <option value="0">Unison</option>
+                    <option value="4">Major Third</option>
+                    <option value="3">Minor Third</option>
+                    <option value="7">Perfect Fifth</option>
+                    <option value="12">Perfect Octave</option>
+                </select><br>
+                <label for="oscillator">Oscillator Type:</label>
+                <select name="oscillator" id="oscillator">
+                    <option value="sine">Select Oscillator</option>
+                    <option value="sine">Sine Wave</option>
+                    <option value="square">Square Wave</option>
+                    <option value="triangle">Triangle Wave</option>
+                    <option value="sawtooth">Sawtooth Wave</option>
+                </select><br>
+                <label for="min_frequency">Minimum Frequency (110Hz - 220Hz):</label>
+                <input type="number" name="min" id="min_frequency" min="110" max="220" value="110"><br>
+                <label for="max_frequency">Maximum Frequency (440Hz - 1760Hz):</label>
+                <input type="number" name="max" id="max_frequency" min="440" max="1760" value="440"><br> 
+                <input type="submit" name="reload" id="reload" value="Reload Theremin">
+            </fieldset>
+        </form>
+        <br><p><a href="index.html">Nicole's Page</a></p>
     </body>
 </html>
