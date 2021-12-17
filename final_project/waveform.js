@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
         progressColor: waveColor,
         scrollParent: true,
         skipLength: 5, // set value skip forward/backward
-        backend: 'MediaElement',
         plugins: [
             WaveSurfer.cursor.create({
                 showTime: true,
@@ -125,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     document.getElementById("fileInput").addEventListener("change", function(e){
+        wavesurfer.empty()
         let file = this.files[0];
         if (file){
             var reader = new FileReader();
@@ -251,8 +251,6 @@ document.addEventListener("DOMContentLoaded", function() {
             filter.frequency.value = band.f;
             return filter;
         });
-        // wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-        // filters[0].connect(wavesurfer.panner)
         
         // connect filters to wavesurfer
         wavesurfer.backend.setFilters(filters);
@@ -285,15 +283,6 @@ document.addEventListener("DOMContentLoaded", function() {
             input.addEventListener('change', eqOnChange);
             
         });
-
-        // wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-        // wavesurfer.backend.setFilter(wavesurfer.panner);
-        let panSlider = document.querySelector('#pannerInput');
-        panSlider.addEventListener('input', function(f){
-            var xDeg = parseInt(f.target.value);
-            var x = Math.sin(xDeg * (Math.PI / 100));
-            wavesurfer.panner.setPosition(x, 0, 0);
-        });
     });
 
     // volume slider
@@ -305,26 +294,26 @@ document.addEventListener("DOMContentLoaded", function() {
         volume.addEventListener('change', volOnChange);
     });
 
-    // wavesurfer.on('ready', function(){
-    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    //     wavesurfer.backend.setFilter(wavesurfer.panner);
-    //     let panSlider = document.querySelector('#pannerInput');
-    //     let panOnChange = function(e) {
-    //         var xDeg = parseInt(e.target.value);
-    //         var x = Math.sin(xDeg * (Math.PI / 100));
-    //         wavesurfer.panner.setPosition(x, 0, 0);
-    //     };
-    //     panSlider.addEventListener('input', panOnChange);
-    // });
+    wavesurfer.on('ready', function(){
+        wavesurfer.panner = wavesurfer.backend.ac.createPanner();
+        wavesurfer.backend.setFilter(wavesurfer.panner);
+        let panSlider = document.querySelector('#pannerInput');
+        let panOnChange = function(e) {
+            var xDeg = parseInt(e.target.value);
+            var x = Math.sin(xDeg * (Math.PI / 100));
+            wavesurfer.panner.setPosition(x, 0, 0);
+        };
+        panSlider.addEventListener('input', panOnChange);
     });
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Load a colormap json file to be passed to the spectrogram.create method.
-    WaveSurfer.util
-        .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
-        .on('success', colorMap => {
-            loadSpectrogram(colorMap);
-        });
 });
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Load a colormap json file to be passed to the spectrogram.create method.
+//     WaveSurfer.util
+//         .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+//         .on('success', colorMap => {
+//             loadSpectrogram(colorMap);
+//         });
+// });
