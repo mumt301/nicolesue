@@ -122,9 +122,36 @@ document.addEventListener("DOMContentLoaded", function() {
         //     ]
         // });   
     }
+    // let fileInput = document.getElementById("fileInput").files[0];
+    // if (fileInput != ""){
+    //     // wavesurfer.empty()
+    //     let file = fileInput;
+    //     if (file){
+    //         var reader = new FileReader();
+
+    //         reader.onload = function (evt) {
+    //             var blob = new window.Blob([new Uint8Array(evt.target.result)]);
+    //             wavesurfer.loadBlob(blob);
+    //         };
+    //         reader.onload = function (evt) {
+    //             // Create a Blob providing as first argument a typed array with the file buffer
+    //             var blob = new window.Blob([new Uint8Array(evt.target.result)]);
+
+    //             // Load the blob into Wavesurfer
+    //             wavesurfer.loadBlob(blob);
+    //         };
+
+    //         reader.onerror = function (evt) {
+    //             console.error("An error ocurred reading the file: ", evt);
+    //         };
+
+    //         // Read File as an ArrayBuffer
+    //         reader.readAsArrayBuffer(file);
+    //     }
+    // }
     
-    document.getElementById("fileInput").addEventListener("change", function(e){
-        wavesurfer.empty()
+    document.getElementById("fileInput").addEventListener("submit", function(e){
+        // wavesurfer.empty()
         let file = this.files[0];
         if (file){
             var reader = new FileReader();
