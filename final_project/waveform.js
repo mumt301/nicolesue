@@ -81,23 +81,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     if (waveStyle === "spectrogram"){
-        const colormap = require('colormap');
-        const colors = colormap({
-            colormap: 'hot',
-            nshades: 256,
-            format: 'float'
-        });
-        const fs = require('fs');
-        fs.writeFile('hot-colormap.json', JSON.stringify(colors)); 
+        // const colormap = require('colormap');
+        // const colors = colormap({
+        //     colormap: 'hot',
+        //     nshades: 256,
+        //     format: 'float'
+        // });
+        // const fs = require('fs');
+        // fs.writeFile('hot-colormap.json', JSON.stringify(colors)); 
 
-        function loadSpectrogram(colorMap){
-            WaveSurfer.spectrogram.create({
-                wavesurfer: wavesurfer,
-                container: "#wave-spectrogram",
-                labels: true,
-                colorMap: colorMap
-            })
-        }
+        // function loadSpectrogram(colorMap){
+        //     WaveSurfer.spectrogram.create({
+        //         wavesurfer: wavesurfer,
+        //         container: "#wave-spectrogram",
+        //         labels: true,
+        //         colorMap: colorMap
+        //     })
+        // }
         // wavesurfer.params.plugins = [
         //     WaveSurfer.spectrogram.create({
         //         wavesurfer: wavesurfer,
@@ -123,63 +123,6 @@ document.addEventListener("DOMContentLoaded", function() {
         //     ]
         // });   
     }
-
-    // var wavesurfer = WaveSurfer.create({
-    //     container     : '#waveform',
-    //     waveColor     : 'black',
-    //     interact      : false,
-    //     cursorWidth   : 0,
-    //     plugins: [
-    //       WaveSurfer.microphone.create()
-    //     ]
-    //   });
-      
-    //   wavesurfer.microphone.on('deviceReady', function(stream) {
-    //       console.log('Device ready!', stream);
-    //   });
-    //   wavesurfer.microphone.on('deviceError', function(code) {
-    //       console.warn('Device error: ' + code);
-    //   });
-      
-    //   // start the microphone
-    //   wavesurfer.microphone.start();
-      
-    //   // pause rendering
-    //   //wavesurfer.microphone.pause();
-      
-    //   // resume rendering
-    //   //wavesurfer.microphone.play();
-      
-    //   // stop visualization and disconnect microphone
-    //   //wavesurfer.microphone.stopDevice();
-      
-    //   // same as stopDevice() but also clears the wavesurfer canvas
-    //   //wavesurfer.microphone.stop();
-      
-    //   // destroy the plugin
-    //   //wavesurfer.microphone.destroy();
-    // document.getElementById("fileinput").addEventListener('change', function(e){
-    //     var file = this.files[0];
-
-    //     if (file) {
-    //         var reader = new FileReader();
-            
-    //         reader.onload = function (evt) {
-    //             // Create a Blob providing as first argument a typed array with the file buffer
-    //             var blob = new window.Blob([new Uint8Array(evt.target.result)]);
-
-    //             // Load the blob into Wavesurfer
-    //             wavesurfer.loadBlob(blob);
-    //         };
-
-    //         reader.onerror = function (evt) {
-    //             console.error("An error ocurred reading the file: ", evt);
-    //         };
-
-    //         // Read File as an ArrayBuffer
-    //         reader.readAsArrayBuffer(file);
-    //     }
-    // }, false);
     
     // document.getElementById("fileInput").addEventListener("change", function(e){
     //     let file = this.files[0];
@@ -207,17 +150,16 @@ document.addEventListener("DOMContentLoaded", function() {
     //     }
     // }, false);
 
-    let audio = new Audio();
-    audio.src = URL.createObjectURL(blob);
-    wavesurfer.load(audio);
 
     document.getElementById("fileInput").addEventListener('change', function(e){
         var file = this.files[0];
         window.fileURL = URL.createObjectURL(file);
         window.wavesurfer.empty()
         window.waveusrfer.load(window.fileURL);
-    // wavesurfer.load(audio);
-    // wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+        wavesurfer.load(audio);
+    });
+
+    wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
     // wavesurfer.load('chanel.mp3');
     wavesurfer.setPlaybackRate(playback);
 
@@ -255,18 +197,6 @@ document.addEventListener("DOMContentLoaded", function() {
     skipForward.addEventListener('click', function(){
         wavesurfer.skipForward();
     });
-
-    // wavesurfer.on('ready', function(){
-    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    //     wavesurfer.backend.setFilter(wavesurfer.panner);
-    //     let panSlider = document.querySelector('#pannerInput');
-    //     let panOnChange = function(e) {
-    //         var xDeg = parseInt(e.target.value);
-    //         var x = Math.sin(xDeg * (Math.PI / 100));
-    //         wavesurfer.panner.setPosition(x, 0, 0);
-    //     };
-    //     panSlider.addEventListener('input', panOnChange);
-    // });
 
     // equalizer
     wavesurfer.on('ready', function() {
@@ -321,6 +251,8 @@ document.addEventListener("DOMContentLoaded", function() {
             filter.frequency.value = band.f;
             return filter;
         });
+        // wavesurfer.panner = wavesurfer.backend.ac.createPanner();
+        // filters[0].connect(wavesurfer.panner)
         
         // connect filters to wavesurfer
         wavesurfer.backend.setFilters(filters);
@@ -354,8 +286,8 @@ document.addEventListener("DOMContentLoaded", function() {
             
         });
 
-        wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-        wavesurfer.backend.setFilter(wavesurfer.panner);
+        // wavesurfer.panner = wavesurfer.backend.ac.createPanner();
+        // wavesurfer.backend.setFilter(wavesurfer.panner);
         let panSlider = document.querySelector('#pannerInput');
         panSlider.addEventListener('input', function(f){
             var xDeg = parseInt(f.target.value);
@@ -395,4 +327,4 @@ document.addEventListener('DOMContentLoaded', function() {
         .on('success', colorMap => {
             loadSpectrogram(colorMap);
         });
-    });})
+});
