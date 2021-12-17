@@ -186,11 +186,25 @@ document.addEventListener("DOMContentLoaded", function() {
             var reader = new FileReader();
 
             reader.onload = function (evt) {
-                var blob = new window.Blob
+                var blob = new window.Blob([new Uint8Array(evt.target.result)]);
                 wavesurfer.loadBlob(blob);
-            }
+            };
+            reader.onload = function (evt) {
+                // Create a Blob providing as first argument a typed array with the file buffer
+                var blob = new window.Blob([new Uint8Array(evt.target.result)]);
+
+                // Load the blob into Wavesurfer
+                wavesurfer.loadBlob(blob);
+            };
+
+            reader.onerror = function (evt) {
+                console.error("An error ocurred reading the file: ", evt);
+            };
+
+            // Read File as an ArrayBuffer
+            reader.readAsArrayBuffer(file);
         }
-    })
+    }, false);
     // wavesurfer.load(audio);
     // wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
     // wavesurfer.load('chanel.mp3');
