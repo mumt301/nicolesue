@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         progressColor: waveColor,
         scrollParent: true,
         skipLength: 5, // set value skip forward/backward
+        backend: 'MediaElement',
         plugins: [
             WaveSurfer.cursor.create({
                 showTime: true,
@@ -180,31 +181,41 @@ document.addEventListener("DOMContentLoaded", function() {
     //     }
     // }, false);
     
-    document.getElementById("fileInput").addEventListener("change", function(e){
-        let file = this.files[0];
-        if (file){
-            var reader = new FileReader();
+    // document.getElementById("fileInput").addEventListener("change", function(e){
+    //     let file = this.files[0];
+    //     if (file){
+    //         var reader = new FileReader();
 
-            reader.onload = function (evt) {
-                var blob = new window.Blob([new Uint8Array(evt.target.result)]);
-                wavesurfer.loadBlob(blob);
-            };
-            reader.onload = function (evt) {
-                // Create a Blob providing as first argument a typed array with the file buffer
-                var blob = new window.Blob([new Uint8Array(evt.target.result)]);
+    //         reader.onload = function (evt) {
+    //             var blob = new window.Blob([new Uint8Array(evt.target.result)]);
+    //             wavesurfer.loadBlob(blob);
+    //         };
+    //         reader.onload = function (evt) {
+    //             // Create a Blob providing as first argument a typed array with the file buffer
+    //             var blob = new window.Blob([new Uint8Array(evt.target.result)]);
 
-                // Load the blob into Wavesurfer
-                wavesurfer.loadBlob(blob);
-            };
+    //             // Load the blob into Wavesurfer
+    //             wavesurfer.loadBlob(blob);
+    //         };
 
-            reader.onerror = function (evt) {
-                console.error("An error ocurred reading the file: ", evt);
-            };
+    //         reader.onerror = function (evt) {
+    //             console.error("An error ocurred reading the file: ", evt);
+    //         };
 
-            // Read File as an ArrayBuffer
-            reader.readAsArrayBuffer(file);
-        }
-    }, false);
+    //         // Read File as an ArrayBuffer
+    //         reader.readAsArrayBuffer(file);
+    //     }
+    // }, false);
+
+    let audio = new Audio();
+    audio.src = URL.createObjectURL(blob);
+    wavesurfer.load(audio);
+
+    document.getElementById("fileInput").addEventListener('change', function(e){
+        var file = this.files[0];
+        window.fileURL = URL.createObjectURL(file);
+        window.wavesurfer.empty()
+        window.waveusrfer.load(window.fileURL);
     // wavesurfer.load(audio);
     // wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
     // wavesurfer.load('chanel.mp3');
@@ -373,84 +384,9 @@ document.addEventListener("DOMContentLoaded", function() {
     //     };
     //     panSlider.addEventListener('input', panOnChange);
     // });
-
-    // panner
-    // wavesurfer.on('ready', function(){
-    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    //     wavesurfer.backend.setFilter(wavesurfer.panner);
-    //     let panSlider = document.querySelector('#pannerInput');
-    //     panSlider.addEventListener('input', function(e){
-    //         var xDeg = parseInt(e.target.value);
-    //         var x = Math.sin(xDeg * (Math.PI / 100));
-    //         wavesurfer.panner.setPosition(x, 0, 0);
-    //     });
-    // });
-    // panner
-    // let panner = wavesurfer.backend.ac.createPanner();
-    // wavesurfer.backend.setFilter(panner);
-
-    // let pannerSlider = document.querySelector("#pannerInput");
-    // pannerSlider.addEventListener("input", function(e){
-    //     var xDeg = parseInt(e.target.value);
-    //     var x = Math.sin(xDeg * (Math.PI / 180));
-    //     wavesurfer.panner.setPosition(x, 0, 0);
-    // })
-
-    // // let panOnChange = function(e);
+    });
 
 
-    // pannerSlider.addEventListener('input', panOnChange);
-    // pannerSlider.addEventListener('change', panOnChange);
-    // onChange();
-    // (function() {
-    //     // Add panner
-    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    //     wavesurfer.backend.setFilter(wavesurfer.panner);
-
-    //     // Bind panner slider
-    //     // @see http://stackoverflow.com/a/14412601/352796
-    //     let panOnChange = function() {
-    //         let xDeg = parseInt(slider.value);
-    //         const x = Math.sin(xDeg * (Math.PI / 180));
-    //         wavesurfer.panner.setPosition(x, 0, 0);
-    //     };
-    //     let slider = document.querySelector('panner');
-    //     slider.addEventListener('input', panOnChange);
-    //     slider.addEventListener('change', panOnChange);
-    //     panOnChange();
-    // })();
-    //DOESNT WORK
-    // wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    // wavesurfer.backend.setFilter(panner);
-
-    // let panOnChange = function(){
-    //     var xDeg = parseInt(pannerSlider.value);
-    //     var x = Math.sin(xDeg * (Math.PI / 180));
-    //     wavesurfer.panner.setPosition(x, 0, 0);
-    // }
-    // let pannerSlider = document.querySelector("#pannerInput");
-    // pannerSlider.addEventListener('input', panOnChange);
-    // pannerSlider.addEventListener('change', panOnChange);
-    // panOnChange();
-
-    // (function() {
-    //     // Add panner
-    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    //     wavesurfer.backend.setFilter(wavesurfer.panner);
-
-    //     // Bind panner slider
-    //     // @see http://stackoverflow.com/a/14412601/352796
-    //     let onChange = function() {
-    //         let xDeg = parseInt(slider.value);
-    //         const x = Math.sin(xDeg * (Math.PI / 180));
-    //         wavesurfer.panner.setPosition(x, 0, 0);
-    //     };
-    //     let slider = document.querySelector('[data-action="pan"]');
-    //     slider.addEventListener('input', onChange);
-    //     slider.addEventListener('change', onChange);
-    //     onChange();
-    // })();
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Load a colormap json file to be passed to the spectrogram.create method.
@@ -459,4 +395,4 @@ document.addEventListener('DOMContentLoaded', function() {
         .on('success', colorMap => {
             loadSpectrogram(colorMap);
         });
-});
+    });})
