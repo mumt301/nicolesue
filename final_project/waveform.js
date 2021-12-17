@@ -180,19 +180,20 @@ document.addEventListener("DOMContentLoaded", function() {
     //     }
     // }, false);
     
-    // document.getElementById("fileInput").addEventListener("change", function(e){
-    //     let file = this.files[0];
-    //     if (file){
-    //         var reader = new FileReader();
+    document.getElementById("fileInput").addEventListener("change", function(e){
+        let file = this.files[0];
+        if (file){
+            var reader = new FileReader();
 
-    //         reader.onload = function (evt) {
-    //             var blob = new window.Blob
-    //         }
-    //     }
-    // })
+            reader.onload = function (evt) {
+                var blob = new window.Blob
+                wavesurfer.loadBlob(blob);
+            }
+        }
+    })
     // wavesurfer.load(audio);
     // wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
-    wavesurfer.load('chanel.mp3');
+    // wavesurfer.load('chanel.mp3');
     wavesurfer.setPlaybackRate(playback);
 
     // play button
