@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Waveform Visualizer</title>
+        <link rel="stylesheet" href="visualizer_design.css">
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
+        <script src="https://unpkg.com/wavesurfer.js"></script> 
+        <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+        <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.js"></script>
+        <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+        <script src="https://unpkg.com/wavesurfer.js@5.2.0/dist/plugin/wavesurfer.microphone.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script> -->
+        <!-- <script src="waveform.js" type="text/JavaScript"></script> -->
+        <!-- <script type="text/javascript" src="waveform.js"></script> -->
+        <script src="waveform.js"></script>
+
+       
+    </head>
+    <body>
+        <h1>Waveform Visualizer</h1>
+        <input type="file" id="fileInput" accept="audio/*">
+        <div id="waveform"></div>
+        <button id="play">Play</button>
+        <button id="play"> <img src="play_pause.png" height="80" width="80"></button> 
+        <button id="mute">Mute</button> <!-- play button -->
+        <button id="skipForward">Skip Forward</button> <!-- skip forward button -->
+        <button id="skipBack">Skip Backward</button> <!-- skip backward button -->
+        <button id="playback">Playback Speed</button>
+        <!-- aesthetics form -->
+        <form method="get" id="parameters"> 
+            <fieldset>
+                <legend>Waveform Style</legend>
+                <label for="playback">Playback Rate: </label>
+                <select name="playback" id="playback">
+                    <option value=0.25>0.25x</option>
+                    <option value=0.5>0.5x</option>
+                    <option value=0.75>0.75x</option>
+                    <option selected="selected" value=1>Normal</option>
+                    <option value=1.25>1.25x</option>
+                    <option value=1.5>1.5x</option>
+                    <option value=1.75>1.75x</option>
+                    <option value=2>2x</option>
+                </select>
+                <input type="radio" id="normalWave" name="waveStyle" value="normalWave" checked="checked">
+                <label for="normalWave">Normal Waveform</label>
+                <input type="radio" id="barWave" name="waveStyle" value="barWave">
+                <label for="barWave">Bar Waveform</label>
+                <input type="radio" id="spectrogram" name="waveStyle" value="spectrogram">
+                <label for="spectrogram">Spectrogram</label>
+                <!-- add colour options here -->
+                <input type="submit" value="Show Waveform">
+            </fieldset>
+        </form>
+        <div class="volumeSlider">
+            Volume:
+            <input id="volume" type="range" min="0" max="1" value="0.5" step="0.1">
+        </div>
+        <div id="panner">
+            Panner:
+            <input id="pannerInput" type="range" min="-45" max="45" value="0">
+        </div>
+        <div id="equalizer">
+            <label for="equalizer">Equalizer: </label>
+        </div>
+    </body>
+</html>
