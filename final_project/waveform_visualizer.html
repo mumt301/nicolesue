@@ -8,16 +8,15 @@
         <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
         <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.js"></script>
         <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
-        <script src="https://unpkg.com/wavesurfer.js@5.2.0/dist/plugin/wavesurfer.microphone.min.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script> -->
-        <!-- <script src="waveform.js" type="text/JavaScript"></script> -->
-        <!-- <script type="text/javascript" src="waveform.js"></script> -->
+        <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.microphone.js"></script>
         <script src="waveform.js"></script>
 
        
     </head>
     <body>
         <h1>Waveform Visualizer</h1>
+        <button id="micButton">Microphone</button>
+        <input type="file" id="fileInput">
         <div id="waveform"></div>
         <button id="play">Play</button>
         <!-- <button id="play"> <img src="play_pause.png" height="80" width="80"></button>  -->
@@ -28,7 +27,6 @@
         <form method="get" id="parameters"> 
             <fieldset>
                 <legend>Waveform Style</legend>
-                <input type="file" id="fileInput">
                 <label for="playback">Playback Rate: </label>
                 <select name="playback" id="playback">
                     <option value=0.25>0.25x</option>
@@ -40,6 +38,8 @@
                     <option value=1.75>1.75x</option>
                     <option value=2>2x</option>
                 </select>
+                <label for="colorPicker">Pick a Color: </label>
+                <input type="color" id="colorPicker">
                 <input type="radio" id="normalWave" name="waveStyle" value="normalWave" checked="checked">
                 <label for="normalWave">Normal Waveform</label>
                 <input type="radio" id="barWave" name="waveStyle" value="barWave">
@@ -47,7 +47,7 @@
                 <input type="radio" id="spectrogram" name="waveStyle" value="spectrogram">
                 <label for="spectrogram">Spectrogram</label>
                 <!-- add colour options here -->
-                <input type="submit" value="Show Waveform">
+                <!-- <input type="submit" value="Show Waveform" onclick="uploadAudio()"> -->
             </fieldset>
         </form>
         <div class="volumeSlider">
