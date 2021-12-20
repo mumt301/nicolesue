@@ -14,47 +14,88 @@ document.addEventListener("DOMContentLoaded", function() {
     let skipBack = document.getElementById('skipBack');
     let skipForward = document.getElementById('skipForward');
     let zoomSlider = document.getElementById('zoom')
+    let wavesurfer;
 
     // spectrogram color map
-    // .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
-    // .on('success', colorMap => { initAndLoadSpectrogram(colorMap); });
-    let colorMap = 'hot-colormap.json';
-    // let colorMap = .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+    WaveSurfer.util
+        .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+        .on('success', colorMap => {
+            initAndLoadSpectrogram(colorMap);
+        });
+    // let colorMap = 'hot-colormap.json';
+    
     // initiate waveform
-    let wavesurfer = WaveSurfer.create({
-        container: '#waveform',
-        responsive: true, 
-        waveColor: waveColor,
-        progressColor: 'rgb(128, 128, 128)',
-        scrollParent: true,
-        skipLength: 5, // sets value of skip forward/backward
-        plugins: [
-            WaveSurfer.cursor.create({
-                showTime: true,
-                opacity: 1,
-                customShowTimeStyle: {
-                    'background-color': '#000',
-                    color: '#fff',
-                    padding: '2px',
-                    'font-size': '10px',
-                }
-            }),
-            WaveSurfer.microphone.create({
-                bufferSize: 4096,
-                numberOfInputChannels: 1,
-                numberOfOutputChannels: 1,
-                constraints: {
-                    video: false,
-                    audio: true
-                }
-            }),
-            WaveSurfer.spectrogram.create({
-                container: '#spectrogram',
-                labels: true,
-                colorMap: colorMap
-            })
-        ]
-    });
+    function initAndLoadSpectrogram(colorMap){
+        let options = {
+            container: '#waveform',
+            responsive: true, 
+            waveColor: waveColor,
+            progressColor: 'rgb(128, 128, 128)',
+            scrollParent: true,
+            skipLength: 5, // sets value of skip forward/backward
+            plugins: [
+                WaveSurfer.cursor.create({
+                    showTime: true,
+                    opacity: 1,
+                    customShowTimeStyle: {
+                        'background-color': '#000',
+                        color: '#fff',
+                        padding: '2px',
+                        'font-size': '10px',
+                    }
+                }),
+                WaveSurfer.microphone.create({
+                    bufferSize: 4096,
+                    numberOfInputChannels: 1,
+                    numberOfOutputChannels: 1,
+                    constraints: {
+                        video: false,
+                        audio: true
+                    }
+                }),
+                WaveSurfer.spectrogram.create({
+                    container: '#spectrogram',
+                    labels: true,
+                    colorMap: colorMap
+                })
+            ]
+        };
+        wavesurfer = WaveSurfer.create(options);
+        wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+    // let wavesurfer = WaveSurfer.create({
+    //     container: '#waveform',
+    //     responsive: true, 
+    //     waveColor: waveColor,
+    //     progressColor: 'rgb(128, 128, 128)',
+    //     scrollParent: true,
+    //     skipLength: 5, // sets value of skip forward/backward
+    //     plugins: [
+    //         WaveSurfer.cursor.create({
+    //             showTime: true,
+    //             opacity: 1,
+    //             customShowTimeStyle: {
+    //                 'background-color': '#000',
+    //                 color: '#fff',
+    //                 padding: '2px',
+    //                 'font-size': '10px',
+    //             }
+    //         }),
+    //         WaveSurfer.microphone.create({
+    //             bufferSize: 4096,
+    //             numberOfInputChannels: 1,
+    //             numberOfOutputChannels: 1,
+    //             constraints: {
+    //                 video: false,
+    //                 audio: true
+    //             }
+    //         }),
+    //         WaveSurfer.spectrogram.create({
+    //             container: '#spectrogram',
+    //             labels: true,
+    //             colorMap: colorMap
+    //         })
+    //     ]
+    // });
 
     // enables microphone 
     micButton.onclick = function(){
@@ -185,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+    // wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
     // wavesurfer.load('sample_audio.mp3');
     //playlist
     let atmosphere = document.getElementById('atmosphere');
@@ -454,4 +495,5 @@ document.addEventListener("DOMContentLoaded", function() {
         volume.addEventListener('input', volOnChange);
         volume.addEventListener('change', volOnChange);
     });
+}
 });
