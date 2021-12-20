@@ -15,103 +15,20 @@ document.addEventListener("DOMContentLoaded", function() {
     let skipForward = document.getElementById('skipForward');
     let zoomSlider = document.getElementById('zoom')
 
+    // spectrogram color map
+    // .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+    // .on('success', colorMap => { initAndLoadSpectrogram(colorMap); });
+    let colorMap = 'hot-colormap.json';
+    // let colorMap = .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
     // initiate waveform
     let wavesurfer = WaveSurfer.create({
         container: '#waveform',
-        responsive: true,
+        responsive: true, 
         waveColor: waveColor,
-        progressColor: 'rgb(128, 128, 128)', // change to lighter shade of wavecolor?
+        progressColor: 'rgb(128, 128, 128)',
         scrollParent: true,
-        skipLength: 5, // set value skip forward/backward
+        skipLength: 5, // sets value of skip forward/backward
         plugins: [
-            WaveSurfer.cursor.create({
-                showTime: true,
-                opacity: 1,
-                customShowTimeStyle: {
-                    'background-color': '#000',
-                    color: '#fff',
-                    padding: '2px',
-                    'font-size': '10px',
-                }
-            }),
-            WaveSurfer.microphone.create({
-                bufferSize: 4096,
-                numberOfInputChannels: 1,
-                numberOfOutputChannels: 1,
-                constraints: {
-                    video: false,
-                    audio: true
-                }
-            }),
-            // WaveSurfer.spectrogram.create({
-            //     container: '#spectrogram',
-            //     labels: true,
-            //     colorMap: colorMap
-            // })
-        ]
-    });
-
-    // microphone 
-    micButton.onclick = function(){
-        let fileEmpty = document.getElementById("fileInput").value;
-        if (fileEmpty != ""){
-            document.getElementById("fileInput").value = "";
-        }
-        wavesurfer.drawer.clearWave();
-        wavesurfer.microphone.on('deviceReady', function(stream) {
-            console.log('Device ready!', stream);
-        });
-        wavesurfer.microphone.on('deviceError', function(code) {
-            console.warn('Device error: ' + code);
-            wavesurfer.microphone.stop();
-            wavesurfer.pause();
-            micButton.textContent = "Microphone On";
-        });
-
-        if (wavesurfer.microphone.active){
-            wavesurfer.microphone.stop();
-            wavesurfer.pause();
-            this.textContent = "Microphone On"
-        }
-        else{
-            wavesurfer.microphone.start();
-            wavesurfer.setMute(true);
-            wavesurfer.play();
-            this.textContent = "Microphone Off"
-        }
-    }
-
-    // normal wave
-    normalWave.addEventListener('click', function(){
-        wavesurfer.drawer.clearWave();
-        wavesurfer.params.barWidth = null,
-        wavesurfer.params.barHeight = 1,
-        wavesurfer.params.barGap = null,
-        wavesurfer.drawBuffer();
-    });
-
-    // bar wave
-    barWave.addEventListener('click', function(){
-        wavesurfer.drawer.clearWave();
-        wavesurfer.params.barWidth = 2,
-        wavesurfer.params.barHeight = 1,
-        wavesurfer.params.barGap = null,
-        wavesurfer.drawBuffer();
-    });
-
-    // spectrogram
-    spectrogram.addEventListener('click', function(){
-        console.log(spectrogramWave);
-        wavesurfer.drawer.clearWave();
-        WaveSurfer.util
-        .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
-        .on('success', colorMap => {
-        initAndLoadSpectrogram(colorMap);
-        });
-    })
-
-    function initAndLoadSpectrogram(colorMap){
-        wavesurfer.params.plugins = [
             WaveSurfer.cursor.create({
                 showTime: true,
                 opacity: 1,
@@ -137,43 +54,139 @@ document.addEventListener("DOMContentLoaded", function() {
                 colorMap: colorMap
             })
         ]
+    });
+
+    // enables microphone 
+    micButton.onclick = function(){
+        // empties uploaded file
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
+        // clears waveform
+        wavesurfer.drawer.clearWave();
+        wavesurfer.microphone.on('deviceReady', function(stream) {
+            console.log('Device ready!', stream);
+        });
+        // stops microphone if there is a device error
+        wavesurfer.microphone.on('deviceError', function(code) {
+            console.warn('Device error: ' + code);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On";
+        });
+        // pauses microphone
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            this.textContent = "Microphone On"
+        }
+        // starts microphone
+        else{
+            wavesurfer.microphone.start();
+            wavesurfer.setMute(true);
+            wavesurfer.play();
+            this.textContent = "Microphone Off"
+        }
     }
-    
+
+    // creates normal wave
+    normalWave.addEventListener('click', function(){
+        wavesurfer.drawer.clearWave();
+        wavesurfer.params.barWidth = null,
+        wavesurfer.params.barHeight = 1,
+        wavesurfer.params.barGap = null,
+        wavesurfer.drawBuffer();
+    });
+
+    // creates bar wave
+    barWave.addEventListener('click', function(){
+        wavesurfer.drawer.clearWave();
+        wavesurfer.params.barWidth = 2,
+        wavesurfer.params.barHeight = 1,
+        wavesurfer.params.barGap = null,
+        wavesurfer.drawBuffer();
+    });
+
+    // spectrogram
+    spectrogram.addEventListener('click', function(){
+        console.log(spectrogramWave);
+        wavesurfer.drawer.clearWave();
+        // WaveSurfer.util
+        // .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+        // .on('success', colorMap => {
+        // initAndLoadSpectrogram(colorMap);
+        // });
+    })
+
+    // function initAndLoadSpectrogram(colorMap){
+    //     wavesurfer.params.plugins = [
+    //         WaveSurfer.cursor.create({
+    //             showTime: true,
+    //             opacity: 1,
+    //             customShowTimeStyle: {
+    //                 'background-color': '#000',
+    //                 color: '#fff',
+    //                 padding: '2px',
+    //                 'font-size': '10px',
+    //             }
+    //         }),
+    //         WaveSurfer.microphone.create({
+    //             bufferSize: 4096,
+    //             numberOfInputChannels: 1,
+    //             numberOfOutputChannels: 1,
+    //             constraints: {
+    //                 video: false,
+    //                 audio: true
+    //             }
+    //         }),
+    //         WaveSurfer.spectrogram.create({
+    //             container: '#spectrogram',
+    //             labels: true,
+    //             colorMap: colorMap
+    //         })
+    //     ]
+    //     wavesurfer.load()
+    // }
+
     color.addEventListener('input', function(){
         wavesurfer.drawer.clearWave();
         wavesurfer.params.waveColor = (color.value)
         wavesurfer.drawBuffer();
     });
-    
+
+    // enables file upload
     document.getElementById("fileInput").addEventListener("input", function(e){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // gets audio file
         let file = this.files[0];
         if (file){
-            play.textContent = "Play";
+            play.textContent = "Play"; // resets play button
             var reader = new FileReader();
+            // reads file 
             reader.onload = function (evt) {
                 var blob = new window.Blob([new Uint8Array(evt.target.result)]);
+                // loads the file input into the waveform
                 wavesurfer.loadBlob(blob);
             };
-            reader.onload = function (evt) {
-                // Create a Blob providing as first argument a typed array with the file buffer
-                var blob = new window.Blob([new Uint8Array(evt.target.result)]);
-
-                // Load the blob into Wavesurfer
-                wavesurfer.loadBlob(blob);
-            };
-
+            // gives error if file cannot be read
             reader.onerror = function (evt) {
                 console.error("An error ocurred reading the file: ", evt);
             };
-
-            // Read File as an ArrayBuffer
+            // reads file as an array buffer
             reader.readAsArrayBuffer(file);
         }
-    }, false);
+    });
 
     wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
-    // wavesurfer.load('chanel.mp3');
-
+    // wavesurfer.load('sample_audio.mp3');
     //playlist
     let atmosphere = document.getElementById('atmosphere');
     let balkan = document.getElementById('balkan');
@@ -183,46 +196,129 @@ document.addEventListener("DOMContentLoaded", function() {
     let river = document.getElementById('river');
     let vocals = document.getElementById('vocals');
 
+    // plays selected playlist audio 
     atmosphere.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
         wavesurfer.load("atmosphere.mp3");
     });
     balkan.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
         wavesurfer.load("balkan_guitars.flac");
     });
     piano.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
         wavesurfer.load("classical_piano.wav");
     });
     dance.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
         wavesurfer.load("dance.m4a");
     });
     jazz.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
-        wavesurfer.load("jazz_guitar.wav");
+        wavesurfer.load("jazz_guitar.mp3");
     });
     river.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
         wavesurfer.load("river_waves.mp3");
     });
     vocals.addEventListener('click', function(){
+        // turns off microphone if it is still on
+        if (wavesurfer.microphone.active){
+            wavesurfer.setMute(false);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On"
+        }
+        // empties file input
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         play.textContent = "Play";
         wavesurfer.load("vocals_synth.mp3");
     });
 
+    // sets playback rate
     playback.addEventListener('change', function(){
-        console.log(document.getElementById('playback').value);
-        wavesurfer.backend.setPlaybackRate(playback.value);
+        wavesurfer.backend.setPlaybackRate(playback.value); // sets playback rate to selected value
     })
 
     // play button
     play.addEventListener('click', function(){
-        if (wavesurfer.getMute() && mute.textContent != "Unmute"){
-            wavesurfer.setMute(false);
-        }
-        wavesurfer.playPause();
+        wavesurfer.playPause(); // toggles between play/pause
+        // changes text content of play buton
         if (this.textContent === "Play") {
             this.textContent = "Pause";
         } else {
@@ -232,8 +328,9 @@ document.addEventListener("DOMContentLoaded", function() {
         
     // mute button
     mute.addEventListener('click', function(){
-        wavesurfer.toggleMute();
+        wavesurfer.toggleMute(); // mutes/unmutes audio
         muteStatus = wavesurfer.getMute();
+        // changes text content of mute button
         if (muteStatus == false) {
             this.textContent = "Mute";
         } else {
@@ -243,31 +340,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // skip backward button
     skipBack.addEventListener('click', function(){
-        wavesurfer.skipBackward();
+        wavesurfer.skipBackward(); // skips forward 'skiplength' seconds
     });
 
     // skip forward button
     skipForward.addEventListener('click', function(){
-        wavesurfer.skipForward();
+        wavesurfer.skipForward(); // skips backward 'skiplength' seconds
     });
 
     // zoom
-    zoomSlider.value = wavesurfer.params.minPxPerSec;
-    zoomSlider.min = wavesurfer.params.minPxPerSec;
+    zoomSlider.value = wavesurfer.params.minPxPerSec; // initializes slider to no zoom
+    zoomSlider.min = wavesurfer.params.minPxPerSec; 
     zoomSlider.max = 1000;
     zoomSlider.addEventListener('input', function() {
-        wavesurfer.zoom(Number(this.value));
+        wavesurfer.zoom(Number(this.value)); 
     });
 
-    // equalizer
+    // creates equalizer
     wavesurfer.on('ready', function() {
-        if (wavesurfer.microphone.active){
-            return;
-        }
         let isEmpty = document.getElementById('equalizer').innerHTML === "";
         if (!isEmpty){
-            // reset eq
-            return;
+            return; // exits eq initialization if there is already an eq present
         }
          let EQ = [
             {
@@ -361,27 +454,4 @@ document.addEventListener("DOMContentLoaded", function() {
         volume.addEventListener('input', volOnChange);
         volume.addEventListener('change', volOnChange);
     });
-
-    // wavesurfer.on('ready', function(){
-    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-    //     wavesurfer.backend.setFilter(wavesurfer.panner);
-    //     let panSlider = document.querySelector('#pannerInput');
-    //     let panOnChange = function(e) {
-    //         var xDeg = parseInt(e.target.value);
-    //         var x = Math.sin(xDeg * (Math.PI / 100));
-    //         wavesurfer.panner.setPosition(x, 0, 0);
-    //     };
-    //     panSlider.addEventListener('input', panOnChange);
-    // });
 });
-
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     // Load a colormap json file to be passed to the spectrogram.create method.
-//     WaveSurfer.util
-//         .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
-//         .on('success', colorMap => {
-//             loadSpectrogram(colorMap);
-//         });
-// });
