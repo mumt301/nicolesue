@@ -111,85 +111,34 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     function initAndLoadSpectrogram(colorMap){
-        wavesurfer = WaveSurfer.create({
-            container: '#waveform',
-            responsive: true,
-            waveColor: waveColor,
-            progressColor: 'rgb(128, 128, 128)', // change to lighter shade of wavecolor?
-            scrollParent: true,
-            skipLength: 5, // set value skip forward/backward
-            plugins: [
-                WaveSurfer.cursor.create({
-                    showTime: true,
-                    opacity: 1,
-                    customShowTimeStyle: {
-                        'background-color': '#000',
-                        color: '#fff',
-                        padding: '2px',
-                        'font-size': '10px',
-                    }
-                }),
-                WaveSurfer.microphone.create({
-                    bufferSize: 4096,
-                    numberOfInputChannels: 1,
-                    numberOfOutputChannels: 1,
-                    constraints: {
-                        video: false,
-                        audio: true
-                    }
-                }),
-                WaveSurfer.spectrogram.create({
-                    container: '#spectrogram',
-                    labels: true,
-                    colorMap: colorMap
-                })
-            ]
-        });
+        wavesurfer.params.plugins = [
+            WaveSurfer.cursor.create({
+                showTime: true,
+                opacity: 1,
+                customShowTimeStyle: {
+                    'background-color': '#000',
+                    color: '#fff',
+                    padding: '2px',
+                    'font-size': '10px',
+                }
+            }),
+            WaveSurfer.microphone.create({
+                bufferSize: 4096,
+                numberOfInputChannels: 1,
+                numberOfOutputChannels: 1,
+                constraints: {
+                    video: false,
+                    audio: true
+                }
+            }),
+            WaveSurfer.spectrogram.create({
+                container: '#spectrogram',
+                labels: true,
+                colorMap: colorMap
+            })
+        ]
     }
-   
-    // if (waveStyle === "spectrogram"){
-        // const colormap = require('colormap');
-        // const colors = colormap({
-        //     colormap: 'hot',
-        //     nshades: 256,
-        //     format: 'float'
-        // });
-        // const fs = require('fs');
-        // fs.writeFile('hot-colormap.json', JSON.stringify(colors)); 
-
-        // function loadSpectrogram(colorMap){
-        //     WaveSurfer.spectrogram.create({
-        //         wavesurfer: wavesurfer,
-        //         container: "#wave-spectrogram",
-        //         labels: true,;
-        //         colorMap: colorMap
-        //     })
-        // }
-        // wavesurfer.params.plugins = [
-        //     WaveSurfer.spectrogram.create({
-        //         wavesurfer: wavesurfer,
-        //         container: "#wave-spectrogram",
-        //         labels: true
-        //         colorMap: colorMap
-        //     })
-        // ]
-        // wavesurfer.drawer.clearWave();
-        // wavesurfer = WaveSurfer.create({
-        //     // container: '#waveform',
-        //     container: document.querySelector('#waveform'),
-        //     waveColor: waveColor,
-        //     progressColor: waveColor,
-        //     scrollParent: true,
-        //     skipLength: 5, // set value skip forward/backward
-        //     plugins: [
-        //         WaveSurfer.spectrogram.create({
-        //             wavesurfer: wavesurfer,
-        //             container: "#wave-spectrogram",
-        //             labels: true
-        //         })
-        //     ]
-        // });   
-    // }
+    
     color.addEventListener('input', function(){
         wavesurfer.drawer.clearWave();
         wavesurfer.params.waveColor = (color.value)
