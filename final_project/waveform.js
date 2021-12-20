@@ -1,12 +1,11 @@
-
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
     // initiate variables
-    let waveColor = "purple";
+    let waveColor = 'purple';
     let play = document.getElementById('play');
     let micButton = document.getElementById('micButton');
     let normalWave = document.getElementById('normalWave');
     let spectrogram = document.getElementById('spectrogramWave')
+    let spectrogramContainer = document.getElementById('spectrogram');
     let barWave = document.getElementById('barWave');
     let color = document.getElementById('colorPicker');
     let playback = document.getElementById('playback');
@@ -60,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
             ]
         };
         wavesurfer = WaveSurfer.create(options);
-        // wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
 
         // enables microphone 
         micButton.onclick = function(){
@@ -118,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // spectrogram
         spectrogram.addEventListener('click', function(){
             console.log(spectrogramWave);
-            spectrogram.style.display = 'none';
+            spectrogramContainer.style.display = 'none';
         })
 
         color.addEventListener('input', function(){
