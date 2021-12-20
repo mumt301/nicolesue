@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let play = document.getElementById('play');
     let micButton = document.getElementById('micButton');
     let normalWave = document.getElementById('normalWave');
+    let spectrogram = document.getElementById('spectrogramWave')
     let barWave = document.getElementById('barWave');
     let color = document.getElementById('colorPicker');
     let playback = document.getElementById('playback');
@@ -43,12 +44,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }),
             // WaveSurfer.spectrogram.create({
-            //     container: #spectrogram,
+            //     container: '#spectrogram',
             //     labels: true,
             //     colorMap: colorMap
             // })
         ]
-
     });
 
     // microphone 
@@ -100,7 +100,53 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // spectrogram
+    spectrogram.addEventListener('click', function(){
+        console.log(spectrogramWave);
+        wavesurfer.drawer.clearWave();
+        WaveSurfer.util
+        .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+        .on('success', colorMap => {
+        initAndLoadSpectrogram(colorMap);
+        });
+    })
 
+    function initAndLoadSpectrogram(colorMap){
+        wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            responsive: true,
+            waveColor: waveColor,
+            progressColor: 'rgb(128, 128, 128)', // change to lighter shade of wavecolor?
+            scrollParent: true,
+            skipLength: 5, // set value skip forward/backward
+            plugins: [
+                WaveSurfer.cursor.create({
+                    showTime: true,
+                    opacity: 1,
+                    customShowTimeStyle: {
+                        'background-color': '#000',
+                        color: '#fff',
+                        padding: '2px',
+                        'font-size': '10px',
+                    }
+                }),
+                WaveSurfer.microphone.create({
+                    bufferSize: 4096,
+                    numberOfInputChannels: 1,
+                    numberOfOutputChannels: 1,
+                    constraints: {
+                        video: false,
+                        audio: true
+                    }
+                }),
+                WaveSurfer.spectrogram.create({
+                    container: '#spectrogram',
+                    labels: true,
+                    colorMap: colorMap
+                })
+            ]
+        });
+    }
+   
     // if (waveStyle === "spectrogram"){
         // const colormap = require('colormap');
         // const colors = colormap({
@@ -189,24 +235,31 @@ document.addEventListener("DOMContentLoaded", function() {
     let vocals = document.getElementById('vocals');
 
     atmosphere.addEventListener('click', function(){
+        play.textContent = "Play";
         wavesurfer.load("atmosphere.mp3");
     });
     balkan.addEventListener('click', function(){
+        play.textContent = "Play";
         wavesurfer.load("balkan_guitars.flac");
     });
     piano.addEventListener('click', function(){
-        wavesurfer.load("classical_piano.mp3");
+        play.textContent = "Play";
+        wavesurfer.load("classical_piano.wav");
     });
     dance.addEventListener('click', function(){
-        wavesurfer.load("dance.wav");
+        play.textContent = "Play";
+        wavesurfer.load("dance.m4a");
     });
     jazz.addEventListener('click', function(){
+        play.textContent = "Play";
         wavesurfer.load("jazz_guitar.wav");
     });
     river.addEventListener('click', function(){
+        play.textContent = "Play";
         wavesurfer.load("river_waves.mp3");
     });
     vocals.addEventListener('click', function(){
+        play.textContent = "Play";
         wavesurfer.load("vocals_synth.mp3");
     });
 
