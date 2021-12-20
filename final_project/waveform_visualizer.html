@@ -5,62 +5,92 @@
         <link rel="stylesheet" href="visualizer_design.css">
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
         <script src="https://unpkg.com/wavesurfer.js"></script> 
-        <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+        <!-- <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script> -->
         <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.js"></script>
         <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
         <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.microphone.js"></script>
         <script src="waveform.js"></script>
-
-       
+        <script src="bundle.js"></script>
+        <!-- css.gg -->
+        <link href='https://css.gg/css' rel='stylesheet'>
+        <!-- UNPKG -->
+        <link href='https://unpkg.com/css.gg/icons/all.css' rel='stylesheet'>
+        <!-- JSDelivr -->
+        <link href='https://cdn.jsdelivr.net/npm/css.gg/icons/all.css' rel='stylesheet'>
     </head>
     <body>
-        <h1>Waveform Visualizer</h1>
-        <button id="micButton">Microphone</button>
+        <h1 >Waveform Visualizer</h1>
+        <button id="micButton" class="button">Microphone On</button>
         <input type="file" id="fileInput">
-        <div id="waveform"></div>
-        <button id="play">Play</button>
-        <!-- <button id="play"> <img src="play_pause.png" height="80" width="80"></button>  -->
-        <button id="mute">Mute</button> <!-- play button -->
-        <button id="skipForward">Skip Forward</button> <!-- skip forward button -->
-        <button id="skipBack">Skip Backward</button> <!-- skip backward button -->
-        <!-- aesthetics form -->
-        <form method="get" id="parameters"> 
-            <fieldset>
-                <legend>Waveform Style</legend>
-                <label for="playback">Playback Rate: </label>
-                <select name="playback" id="playback">
-                    <option value=0.25>0.25x</option>
-                    <option value=0.5>0.5x</option>
-                    <option value=0.75>0.75x</option>
-                    <option selected="selected" value=1>Normal</option>
-                    <option value=1.25>1.25x</option>
-                    <option value=1.5>1.5x</option>
-                    <option value=1.75>1.75x</option>
-                    <option value=2>2x</option>
-                </select>
-                <label for="colorPicker">Pick a Color: </label>
-                <input type="color" id="colorPicker">
-                <input type="radio" id="normalWave" name="waveStyle" value="normalWave" checked="checked">
-                <label for="normalWave">Normal Waveform</label>
-                <input type="radio" id="barWave" name="waveStyle" value="barWave">
-                <label for="barWave">Bar Waveform</label>
-                <input type="radio" id="spectrogram" name="waveStyle" value="spectrogram">
-                <label for="spectrogram">Spectrogram</label>
-                <!-- add colour options here -->
-                <!-- <input type="submit" value="Show Waveform" onclick="uploadAudio()"> -->
-            </fieldset>
-        </form>
-        <div class="volumeSlider">
+        <div id="waveform"></div><br>
+        <div id="spectrogram"></div><br>
+        <br><div class="center">
+            <button id="play" class="button">Play</button> <!-- play button -->
+            <button id="mute" class="button">Mute</button> <!-- mute button -->
+            <button id="skipForward" class="button">Skip Forward</button> <!-- skip forward button -->
+            <button id="skipBack" class="button">Skip Backward</button> <!-- skip backward button -->
+        </div><br>
+        <br><fieldset>
+            <legend>Waveform Style</legend><br>
+            <label for="playback">Playback Rate: </label>
+            <select name="playback" id="playback">
+                <option value=0.25>0.25x</option>
+                <option value=0.5>0.5x</option>
+                <option value=0.75>0.75x</option>
+                <option selected="selected" value=1>Normal</option>
+                <option value=1.25>1.25x</option>
+                <option value=1.5>1.5x</option>
+                <option value=1.75>1.75x</option>
+                <option value=2>2x</option>
+            </select><br><br>
+            <label for="colorPicker">Pick a Color: </label>
+            <input type="color" id="colorPicker"><br><br>
+            <label for="normalWave">Choose a Style: </label>
+            <input type="radio" id="normalWave" name="waveStyle" value="normalWave" checked="checked">
+            <label for="normalWave">Normal Waveform</label>
+            <input type="radio" id="barWave" name="waveStyle" value="barWave">
+            <label for="barWave">Bar Waveform</label>
+            <input type="radio" id="spectrogram" name="waveStyle" value="spectrogram">
+            <label for="spectrogram">Spectrogram</label>
+            <!-- add colour options here -->
+            <!-- <input type="submit" value="Show Waveform" onclick="uploadAudio()"> -->
+        </fieldset><br>
+        <div class="volumeSlider, left">
             Volume:
             <input id="volume" type="range" min="0" max="1" value="0.5" step="0.1">
-        </div>
-        <div id="panner">
+        </div><br>
+        <!-- <div class="center" id="panner">
             Panner:
             <input id="pannerInput" type="range" min="-45" max="45" value="0">
+        </div> -->
+        <br>
+        <div>
+            Zoom:
+            <input id="zoom" data-action="zoom" type="range" min="-45" max="45" value="0">
+        </div><br>
+        <!-- <br><label for="equalizer" class="left">Equalizer: </label><br> -->
+        <br><p class="left">Equalizer:</p>
+        <div id="equalizer"></div>
+        <div class="playlist">
+            <button id="atmosphere">Atmosphere</button>
+            <button id="balkan">Balkan Guitars</button>
+            <button id="piano">Classical Piano</button>
+            <button id="dance">Dance Music</button>
+            <button id="jazz">Jazz Guitar</button>
+            <button id="river">River Waves</button>
+            <button id="vocals">Synth Vocals</button>
+            <!-- <a href="atmosphere.mp3">
+                Atmosphere
+                <span class="badge">0:21</span>
+
+            </a>
+            <a href="balkan_guitars.flac">Balkan Guitars</a>
+            <a href="classical_piano.mp3">Classical Piano</a>
+            <a href="dance.wav">Dance Music</a>
+            <a href="jazz_guitar.wav">Jazz Guitar</a>
+            <a href="river_waves.mp3">River Sounds</a>
+            <a href="vocals_synth.mp3">Synth Vocals</a> -->
         </div>
-        <div id="equalizer">
-            <label for="equalizer">Equalizer: </label>
-        </div>
-        <!-- <br><a href="assignments.html">Nicole's Page</a> -->
+
     </body>
 </html>

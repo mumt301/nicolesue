@@ -1,0 +1,107 @@
+body{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+h1{
+    font-family: "Archivo Black", sans-serif;
+    font-weight: bold;
+    font-size: 100px;
+    text-align: center;
+    margin-bottom: 0;
+    background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4  51%, #E55D87  100%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+label{
+    font-weight: bold;
+}
+
+legend{
+    font-weight: bold;
+}
+
+.center{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.centerMiddle{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);  
+}
+/* .gg-play-button{
+    --ggs: 1;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px
+}
+.gg-play-pause{
+    --ggs: 1;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px
+} */
+.right {
+    float: right;
+    width: 300px;
+    padding: 10px;
+}
+
+.left {
+    float: left;
+    width: 300px;
+    padding: 10px;
+}
+
+.button{
+    background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+    margin: 5px;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    background-size: 200% auto;
+    color: white;            
+    border-radius: 10px;
+    
+} 
+
+#waveform{
+    position: relative
+}
+
+.playlist button {
+    background-color: #04AA6D; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 50%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+}
+  
+.playlist button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+  
+  /* Add a background color on hover */
+.playlist button:hover {
+    background-color: #3e8e41;
+}

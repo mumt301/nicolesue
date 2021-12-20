@@ -1,14 +1,25 @@
 
+
 document.addEventListener("DOMContentLoaded", function() {
-    // this function runs when the DOM is ready, i.e. when the document has been parsed
     // initiate variables
     let waveColor = "purple";
+    let play = document.getElementById('play');
+    let micButton = document.getElementById('micButton');
+    let normalWave = document.getElementById('normalWave');
+    let barWave = document.getElementById('barWave');
+    let color = document.getElementById('colorPicker');
+    let playback = document.getElementById('playback');
+    let mute = document.getElementById('mute');
+    let skipBack = document.getElementById('skipBack');
+    let skipForward = document.getElementById('skipForward');
+    let zoomSlider = document.getElementById('zoom')
+
+    // initiate waveform
     let wavesurfer = WaveSurfer.create({
-        // container: '#waveform',
-        container: document.querySelector('#waveform'),
+        container: '#waveform',
         responsive: true,
         waveColor: waveColor,
-        progressColor: waveColor, // change this
+        progressColor: 'rgb(128, 128, 128)', // change to lighter shade of wavecolor?
         scrollParent: true,
         skipLength: 5, // set value skip forward/backward
         plugins: [
@@ -19,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     'background-color': '#000',
                     color: '#fff',
                     padding: '2px',
-                    'font-size': '10px'
+                    'font-size': '10px',
                 }
             }),
             WaveSurfer.microphone.create({
@@ -30,51 +41,47 @@ document.addEventListener("DOMContentLoaded", function() {
                     video: false,
                     audio: true
                 }
-            })
+            }),
+            // WaveSurfer.spectrogram.create({
+            //     container: #spectrogram,
+            //     labels: true,
+            //     colorMap: colorMap
+            // })
         ]
-    });
-    
-    micButton = document.getElementById('micButton');
-    // micButton.addEventListener('click', function(){
-    //     console.log(wavesurfer.getActivePlugins());
-    //     wavesurfer.drawer.clearWave();
-    //     wavesurfer.microphone.on('deviceReady', function(stream) {
-    //         console.log('Device ready!', stream);
-    //     });
-    //     wavesurfer.microphone.on('deviceError', function(code) {
-    //         console.warn('Device error: ' + code);
-    //     });
-    //     wavesurfer.microphone.start();
 
-    //     if (wavesurfer.microphone.active){
-    //         wavesurfer.microhpone.stop();
-    //     }
-    //     else{
-    //         wavesurfer.microphone.start();
-    //     }
+    });
+
+    // microphone 
     micButton.onclick = function(){
+        let fileEmpty = document.getElementById("fileInput").value;
+        if (fileEmpty != ""){
+            document.getElementById("fileInput").value = "";
+        }
         wavesurfer.drawer.clearWave();
         wavesurfer.microphone.on('deviceReady', function(stream) {
             console.log('Device ready!', stream);
         });
         wavesurfer.microphone.on('deviceError', function(code) {
             console.warn('Device error: ' + code);
+            wavesurfer.microphone.stop();
+            wavesurfer.pause();
+            micButton.textContent = "Microphone On";
         });
 
         if (wavesurfer.microphone.active){
             wavesurfer.microphone.stop();
             wavesurfer.pause();
-            this.textContent = "Microphone"
+            this.textContent = "Microphone On"
         }
         else{
             wavesurfer.microphone.start();
+            wavesurfer.setMute(true);
             wavesurfer.play();
             this.textContent = "Microphone Off"
         }
     }
 
     // normal wave
-    normalWave = document.getElementById('normalWave');
     normalWave.addEventListener('click', function(){
         wavesurfer.drawer.clearWave();
         wavesurfer.params.barWidth = null,
@@ -84,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // bar wave
-    barWave = document.getElementById('barWave');
     barWave.addEventListener('click', function(){
         wavesurfer.drawer.clearWave();
         wavesurfer.params.barWidth = 2,
@@ -138,7 +144,6 @@ document.addEventListener("DOMContentLoaded", function() {
         //     ]
         // });   
     // }
-    color = document.getElementById('colorPicker');
     color.addEventListener('input', function(){
         wavesurfer.drawer.clearWave();
         wavesurfer.params.waveColor = (color.value)
@@ -148,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("fileInput").addEventListener("input", function(e){
         let file = this.files[0];
         if (file){
+            play.textContent = "Play";
             var reader = new FileReader();
             reader.onload = function (evt) {
                 var blob = new window.Blob([new Uint8Array(evt.target.result)]);
@@ -167,24 +173,55 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Read File as an ArrayBuffer
             reader.readAsArrayBuffer(file);
-            play.textContent = "Play";
         }
     }, false);
 
     wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
     // wavesurfer.load('chanel.mp3');
 
-    playback = document.getElementById('playback');
+    //playlist
+    let atmosphere = document.getElementById('atmosphere');
+    let balkan = document.getElementById('balkan');
+    let piano = document.getElementById('piano');
+    let dance = document.getElementById('dance');
+    let jazz = document.getElementById('jazz');
+    let river = document.getElementById('river');
+    let vocals = document.getElementById('vocals');
+
+    atmosphere.addEventListener('click', function(){
+        wavesurfer.load("atmosphere.mp3");
+    });
+    balkan.addEventListener('click', function(){
+        wavesurfer.load("balkan_guitars.flac");
+    });
+    piano.addEventListener('click', function(){
+        wavesurfer.load("classical_piano.mp3");
+    });
+    dance.addEventListener('click', function(){
+        wavesurfer.load("dance.wav");
+    });
+    jazz.addEventListener('click', function(){
+        wavesurfer.load("jazz_guitar.wav");
+    });
+    river.addEventListener('click', function(){
+        wavesurfer.load("river_waves.mp3");
+    });
+    vocals.addEventListener('click', function(){
+        wavesurfer.load("vocals_synth.mp3");
+    });
+
     playback.addEventListener('change', function(){
         console.log(document.getElementById('playback').value);
         wavesurfer.backend.setPlaybackRate(playback.value);
     })
 
     // play button
-    play = document.getElementById('play');
     play.addEventListener('click', function(){
+        if (wavesurfer.getMute() && mute.textContent != "Unmute"){
+            wavesurfer.setMute(false);
+        }
         wavesurfer.playPause();
-        if (this.textContent === 'Play') {
+        if (this.textContent === "Play") {
             this.textContent = "Pause";
         } else {
             this.textContent = "Play";
@@ -192,7 +229,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
         
     // mute button
-    mute = document.getElementById('mute');
     mute.addEventListener('click', function(){
         wavesurfer.toggleMute();
         muteStatus = wavesurfer.getMute();
@@ -204,20 +240,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // skip backward button
-    skipBack = document.getElementById('skipBack');
     skipBack.addEventListener('click', function(){
         wavesurfer.skipBackward();
     });
 
     // skip forward button
-    skipForward = document.getElementById('skipForward');
     skipForward.addEventListener('click', function(){
         wavesurfer.skipForward();
+    });
+
+    // zoom
+    zoomSlider.value = wavesurfer.params.minPxPerSec;
+    zoomSlider.min = wavesurfer.params.minPxPerSec;
+    zoomSlider.max = 1000;
+    zoomSlider.addEventListener('input', function() {
+        wavesurfer.zoom(Number(this.value));
     });
 
     // equalizer
     wavesurfer.on('ready', function() {
         if (wavesurfer.microphone.active){
+            return;
+        }
+        let isEmpty = document.getElementById('equalizer').innerHTML === "";
+        if (!isEmpty){
+            // reset eq
             return;
         }
          let EQ = [
@@ -291,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function() {
             wavesurfer.util.style(input, {
                 webkitAppearance: 'slider-vertical',
                 width: '50px',
-                height: '150px'
+                height: '150px',
             });
             container.appendChild(input);
 
@@ -313,17 +360,17 @@ document.addEventListener("DOMContentLoaded", function() {
         volume.addEventListener('change', volOnChange);
     });
 
-    wavesurfer.on('ready', function(){
-        wavesurfer.panner = wavesurfer.backend.ac.createPanner();
-        wavesurfer.backend.setFilter(wavesurfer.panner);
-        let panSlider = document.querySelector('#pannerInput');
-        let panOnChange = function(e) {
-            var xDeg = parseInt(e.target.value);
-            var x = Math.sin(xDeg * (Math.PI / 100));
-            wavesurfer.panner.setPosition(x, 0, 0);
-        };
-        panSlider.addEventListener('input', panOnChange);
-    });
+    // wavesurfer.on('ready', function(){
+    //     wavesurfer.panner = wavesurfer.backend.ac.createPanner();
+    //     wavesurfer.backend.setFilter(wavesurfer.panner);
+    //     let panSlider = document.querySelector('#pannerInput');
+    //     let panOnChange = function(e) {
+    //         var xDeg = parseInt(e.target.value);
+    //         var x = Math.sin(xDeg * (Math.PI / 100));
+    //         wavesurfer.panner.setPosition(x, 0, 0);
+    //     };
+    //     panSlider.addEventListener('input', panOnChange);
+    // });
 });
 
 
