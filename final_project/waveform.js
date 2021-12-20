@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // spectrogram
         spectrogram.addEventListener('click', function(){
             console.log(spectrogramWave);
-            spectrogramContainer.style.display = 'none';
+            spectrogramContainer.style.display = 'inline-block';
         })
 
         color.addEventListener('input', function(){
@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+        spectrogramContainer.style.display = 'none';
         // wavesurfer.load('sample_audio.mp3');
         //playlist
         let atmosphere = document.getElementById('atmosphere');
