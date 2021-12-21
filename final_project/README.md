@@ -12,9 +12,9 @@ Accepted Audio Inputs:
 * Local audio files
 * Preloaded playlist
 
-Above the waveform, there are options to use your microphone input or upload a local audio file. To select the microphone audio input, click the "Microphone On" button. This will give rise to a reactive waveform. To upload a local audio file, click the "Choose File" button and select an audio file to visualize it's waveform.
+Above the waveform, there are options to use your microphone input or upload a local audio file. To select the microphone audio input, click the "Microphone On" button. This will give rise to a reactive waveform. To upload a local audio file, click the "Choose File" button and select an audio file to visualize its waveform.
 
-In the bottom left corner, there is a playlist of preloaded audio files. Select any audio file to view it's waveform.
+In the bottom left corner, there is a playlist of preloaded audio files. Select any audio file to view its waveform.
 
 There are also style options that can be used to modify the waveform. To change the color of the waveform, select any colour in the "Pick a Color" gradient. To change the style of the waveform, toggle between the "Normal Waveform", "Bar Waveform", and "Spectrogram" buttons.
 
@@ -32,11 +32,11 @@ To use these audio features, simply select your preferred options using the corr
 
 Built with:
 
-* [wavesurfer.js](https://wavesurfer-js.org/).
+* [wavesurfer.js](https://wavesurfer-js.org/)
 
 ## Supported Browsers
 
-Works in modern browsers that support Web Audio:
+The waveform visualizer works in modern browsers that support Web Audio:
 
 * Edge versions 12 - 96
 * Firefox versions 25 - 97
@@ -45,7 +45,7 @@ Works in modern browsers that support Web Audio:
 
 ## License
 
-This work is licensed under a
+This work is licensed under an
 [MIT License](LICENSE).
 
 ## Discussion
