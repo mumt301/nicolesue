@@ -101,9 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // creates normal wave
         normalWave.addEventListener('click', function(){
             // remove spectrogram
-            if (spectrogramContainer.style.display != 'none'){
-                spectrogramContainer.style.display = 'none';
-            }
+            spectrogramContainer.style.display = 'none';
             wavesurfer.drawer.clearWave();
             wavesurfer.params.barWidth = null,
             wavesurfer.params.barHeight = 1,
@@ -114,9 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // creates bar wave
         barWave.addEventListener('click', function(){
             // remove spectrogram
-            if (spectrogramContainer.style.display != 'none'){
-                spectrogramContainer.style.display = 'none';
-            }
+            spectrogramContainer.style.display = 'none';
             wavesurfer.drawer.clearWave();
             wavesurfer.params.barWidth = 2,
             wavesurfer.params.barHeight = 1,
@@ -131,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         color.addEventListener('input', function(){
             wavesurfer.drawer.clearWave();
-            wavesurfer.params.waveColor = (color.value)
+            wavesurfer.params.waveColor = (color.value);
             wavesurfer.drawBuffer();
         });
 
