@@ -1,6 +1,6 @@
 # Interactive Waveform Visualizer
 
-![alt text](https://github.com/[nicolesue]/[mumt301]/blob/[final_project]/sample_waveform.JPG?raw=true)
+![alt text](https://github.com/nicolesue/mumt301/tree/main/final_project/sample_waveform.JPG?raw=true)
 
 ## Usage
 
