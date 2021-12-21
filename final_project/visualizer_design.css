@@ -88,18 +88,18 @@ legend{
 
 .playlist button {
     position: relative;
-    background-color: white; /* Green background */
-    border: 1px solid #ddd; /* Green border */
-    color: black; /* White text */
-    padding: 10px 15px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    width: 80%; /* Set a width if needed */
-    display: block; /* Make the buttons appear below each other */
+    background-color: white; 
+    border: 1px solid #ddd; 
+    color: black; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    width: 80%;
+    display: block;
     text-align: left;
 }
   
 .playlist button:not(:last-child) {
-    border-bottom: none; /* Prevent double borders */
+    border-bottom: none;
 }
   
 .playlist button:hover {
@@ -134,13 +134,3 @@ legend{
     flex: 1;
     justify-content: center;
 }
-/* 
-.flexChild:first-child {
-    margin-right: 200px;
-    justify-content: center;
-} 
-
-.flexChild:last-child {
-    margin-right: 300px;
-    justify-content: center;
-}  */
