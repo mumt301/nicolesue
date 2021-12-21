@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // spectrogram
         spectrogram.addEventListener('click', function(){
             console.log(spectrogramWave);
-            spectrogramContainer.style.display = 'inline-block';
+            spectrogramContainer.style.display = 'block';
         })
 
         color.addEventListener('input', function(){
