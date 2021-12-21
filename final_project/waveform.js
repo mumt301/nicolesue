@@ -173,13 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // plays selected playlist audio 
         atmosphere.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
@@ -189,13 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wavesurfer.load("atmosphere.mp3");
         });
         balkan.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
@@ -205,13 +191,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wavesurfer.load("balkan_guitars.flac");
         });
         piano.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
@@ -221,13 +200,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wavesurfer.load("classical_piano.wav");
         });
         dance.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
@@ -237,13 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wavesurfer.load("dance.m4a");
         });
         jazz.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
@@ -253,13 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wavesurfer.load("jazz_guitar.mp3");
         });
         river.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
@@ -269,13 +227,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wavesurfer.load("river_waves.mp3");
         });
         vocals.addEventListener('click', function(){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // empties file input
             let fileEmpty = document.getElementById("fileInput").value;
             if (fileEmpty != ""){
