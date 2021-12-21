@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         };
         wavesurfer = WaveSurfer.create(options);
+        spectrogramContainer.style.display = 'none';
 
         // enables microphone 
         micButton.onclick = function(){
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // spectrogram
         spectrogram.addEventListener('click', function(){
             console.log(spectrogramWave);
-            spectrogramContainer.style.display = 'block';
+            spectrogramContainer.style.display = 'inline';
         })
 
         color.addEventListener('input', function(){
@@ -154,9 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
-        spectrogramContainer.style.display = 'none';
-        // wavesurfer.load('sample_audio.mp3');
+        wavesurfer.load('sample_audio.mp3');
+
         //playlist
         let atmosphere = document.getElementById('atmosphere');
         let balkan = document.getElementById('balkan');
