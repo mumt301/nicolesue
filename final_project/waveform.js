@@ -133,13 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // enables file upload
         document.getElementById("fileInput").addEventListener("input", function(e){
-            // turns off microphone if it is still on
-            if (wavesurfer.microphone.active){
-                wavesurfer.setMute(false);
-                wavesurfer.microphone.stop();
-                wavesurfer.pause();
-                micButton.textContent = "Microphone On"
-            }
             // gets audio file
             let file = this.files[0];
             if (file){
