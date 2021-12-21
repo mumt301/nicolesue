@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (fileEmpty != ""){
                 document.getElementById("fileInput").value = "";
             }
+            // remove spectrogram
+            spectrogramContainer.style.display = 'none';
             // clears waveform
             wavesurfer.drawer.clearWave();
             wavesurfer.microphone.on('deviceReady', function(stream) {
@@ -98,6 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // creates normal wave
         normalWave.addEventListener('click', function(){
+            // remove spectrogram
+            spectrogramContainer.style.display = 'none';
             wavesurfer.drawer.clearWave();
             wavesurfer.params.barWidth = null,
             wavesurfer.params.barHeight = 1,
@@ -107,6 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // creates bar wave
         barWave.addEventListener('click', function(){
+            // remove spectrogram
+            spectrogramContainer.style.display = 'none';
             wavesurfer.drawer.clearWave();
             wavesurfer.params.barWidth = 2,
             wavesurfer.params.barHeight = 1,
@@ -117,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // spectrogram
         spectrogram.addEventListener('click', function(){
             console.log(spectrogramWave);
-            spectrogramContainer.style.display = 'inline';
+            spectrogramContainer.style.display = 'block';
         })
 
         color.addEventListener('input', function(){
