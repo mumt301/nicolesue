@@ -1,5 +1,7 @@
 # Interactive Waveform Visualizer
 
+![alt text](https://github.com/[nicolesue]/[mumt301]/blob/[final_project]/sample_waveform.JPG?raw=true)
+
 ## Usage
 
 This project consists of an interactive audio visualization. After loading an audio file, a navigable waveform will appear.
@@ -15,7 +17,6 @@ Above the waveform, there are options to use your microphone input or upload a l
 In the bottom left corner, there is a playlist of preloaded audio files. Select any audio file to view it's waveform.
 
 There are also style options that can be used to modify the waveform. To change the color of the waveform, select any colour in the "Pick a Color" gradient. To change the style of the waveform, toggle between the "Normal Waveform", "Bar Waveform", and "Spectrogram buttons.
-
 
 Audio Features:
 
